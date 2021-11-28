@@ -1,0 +1,46 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.202.3/containers/python-3
+{
+  "name": "misorobotics.ros Ansible Environment",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "VARIANT": "focal"
+    }
+  },
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "/bin/bash"
+      }
+    },
+    "python.defaultInterpreterPath": "/bin/python",
+    "python.languageServer": "Default",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.formatting.blackPath": "/usr/local/bin/black",
+    "python.linting.banditPath": "/usr/local/bin/bandit",
+    "python.linting.flake8Path": "/usr/local/bin/flake8",
+    "python.linting.mypyPath": "/usr/local/bin/mypy",
+    "python.linting.pycodestylePath": "/usr/local/bin/pycodestyle",
+    "python.linting.pydocstylePath": "/usr/local/bin/pydocstyle",
+    "python.linting.pylintPath": "/usr/local/bin/pylint"
+  },
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "github.vscode-pull-request-github",
+    "ms-python.python",
+    "pkief.material-icon-theme",
+    "tomaciazek.ansible",
+    "vscode-icons-team.vscode-icons",
+    "zainchen.json"
+  ],
+  "postCreateCommand": "/bin/bash ./.devcontainer/post_create_command.sh",
+  "remoteUser": "vscode"
+}

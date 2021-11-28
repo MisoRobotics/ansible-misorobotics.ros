@@ -1,0 +1,6 @@
+"[5~": history-search-backward
+"[6~": history-search-forward
+
+set colored-stats On
+set mark-symlinked-directories On
+set visible-stats On

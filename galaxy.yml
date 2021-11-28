@@ -1,0 +1,20 @@
+---
+namespace: misorobotics
+name: ros
+version: 0.1.0
+readme: README.md
+authors:
+  - Ryan Sinnet <rsinnet@misorobotics.com>
+description: |-
+  Install and configure the Robot Operating System and related tools.
+license_file: LICENSE
+tags: [gazebo, robotics, ros, simulation]
+dependencies: {}
+repository: |-
+  https://github.com/MisoRobotics/ansible-misorobotics.ros.git
+documentation: |-
+  https://github.com/MisoRobotics/ansible-misorobotics.ros/wiki
+homepage: |-
+  https://github.com/MisoRobotics/ansible-misorobotics.ros/wiki
+issues: |-
+  https://github.com/MisoRobotics/ansible-misorobotics.ros/issues

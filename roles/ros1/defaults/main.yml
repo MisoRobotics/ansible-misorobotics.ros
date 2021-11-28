@@ -1,0 +1,41 @@
+--- # defaults file for ros1
+ros_distro:
+  # Distribution of ROS to install.
+  noetic
+
+gazebo_version:
+  # Version of gazebo to install or null.
+  "11"
+
+dev:
+  # If yes, install ROS development packages.
+  yes
+
+dev_packages:
+  # Python packages to install for ROS development.
+  - colcon-common-extensions
+  - dev
+  - empy
+  - rosdep
+  - setuptools
+  - wheel
+  - wstool
+
+default_python_version:
+  # Maps from ROS version codename to either '2' or '3'.
+  kinetic: 2
+  melodic: 2
+  noetic: 3
+
+packages:
+  # ROS packages to install (without ros-{ros_distro}- prefix).
+  []
+
+rosdep_update:
+  # If true, initialize rosdep and update sources
+  yes
+
+python_apt_package_prefix:
+  # The prefix to use for computing APT package names for Python packages.
+  >-
+  python{{ (default_python_version[ros_distro] == 3) | ternary("3", "") }}-

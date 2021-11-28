@@ -1,0 +1,4 @@
+--- # defaults file for gazebo
+gazebo_version:
+  # Version of gazebo to install.
+  "11"

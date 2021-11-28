@@ -1,0 +1,20 @@
+--- # tasks file for gazebo
+- name: Add Gazebo signing key
+  become: yes
+  ansible.builtin.apt_key:
+    id: 67170598AF249743
+    keyring: /etc/apt/trusted.gpg.d/gazebo-official.gpg
+    keyserver: keyserver.ubuntu.com
+- name: Add Gazebo APT repository
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: >-
+      deb [signed-by=/etc/apt/trusted.gpg.d/gazebo-official.gpg]
+      http://packages.osrfoundation.org/gazebo/ubuntu-stable
+      {{ansible_facts.distribution_release}}
+      main
+    filename: gazebo-official
+- name: Install Gazebo
+  become: yes
+  ansible.builtin.apt:
+    name: "gazebo{{gazebo_version}}*"

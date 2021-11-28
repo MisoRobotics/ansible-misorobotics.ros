@@ -1,0 +1,71 @@
+--- # tasks file for ros1
+- name: Install bootstrap dependencies
+  become: yes
+  ansible.builtin.apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+      - dbus
+      - dirmngr
+      - git
+      - gpg
+      - lsb-release
+      - openssh-client
+      - software-properties-common
+      - sudo
+
+- name: Add ROS signing key
+  become: yes
+  ansible.builtin.apt_key:
+    url: https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc
+    keyring: /etc/apt/trusted.gpg.d/ros-official.gpg
+
+- name: Add ROS APT repository
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: >-
+      deb [signed-by=/etc/apt/trusted.gpg.d/ros-official.gpg]
+      http://packages.ros.org/ros/ubuntu
+      {{ansible_facts.distribution_release}}
+      main
+    filename: ros-official
+
+- name: Install latest Gazebo
+  include_role:
+    name: misorobotics.ros.gazebo
+  when: not not gazebo_version
+
+- name: Install base ROS packages
+  become: yes
+  ansible.builtin.apt:
+    name: "ros-{{ros_distro}}-ros-base"
+
+- name: Install additional ROS packages
+  become: yes
+  ansible.builtin.apt:
+    name: >-
+      {{ ["ros-%s-"|format(ros_distro)] | product(packages) | map("join") }}
+  when: packages | length > 0
+
+- name: Install ROS development packages
+  become: yes
+  ansible.builtin.apt:
+    name: >-
+      {{ [python_apt_package_prefix] | product(dev_packages) | map("join") }}
+  when: dev
+
+- name: Remove rosdep defaults
+  become: true
+  ansible.builtin.file:
+    path: /etc/ros/rosdep/sources.list.d/20-default.list
+    state: absent
+  when: dev and rosdep_update
+
+- name: Initialize rosdep
+  become: true
+  shell: rosdep init
+  when: dev and rosdep_update
+
+- name: Update rosdep sources
+  shell: rosdep update
+  when: dev and rosdep_update

@@ -1,0 +1,14 @@
+galaxy_info:
+  author: Ryan Sinnet
+  description: Install ROS
+  company: Miso Robotics
+  license: MIT
+  min_ansible_version: 2.9
+  platforms: # https://galaxy.ansible.com/api/v1/platforms/
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+  galaxy_tags: [robotics, ros]
+
+dependencies: []

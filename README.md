@@ -1,3 +1,3 @@
 # Ansible Collection - misorobotics.ros
 
-Install and configure the Robot Operating System (ROS 1).
+Install and configure the Robot Operating System and related tools.

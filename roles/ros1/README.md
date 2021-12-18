@@ -1,6 +1,6 @@
-# Role Name
+# miso-robotics.ros.ros1
 
-Install ROS 1 from official APT repository.
+Install ROS 1.
 
 ## Requirements
 

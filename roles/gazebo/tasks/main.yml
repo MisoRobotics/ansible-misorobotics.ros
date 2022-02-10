@@ -3,13 +3,13 @@
   become: yes
   ansible.builtin.apt_key:
     id: 67170598AF249743
-    keyring: /etc/apt/trusted.gpg.d/gazebo-official.gpg
+    keyring: /usr/share/keyrings/gazebo-official.gpg
     keyserver: keyserver.ubuntu.com
 - name: Add Gazebo APT repository
   become: yes
   ansible.builtin.apt_repository:
     repo: >-
-      deb [signed-by=/etc/apt/trusted.gpg.d/gazebo-official.gpg]
+      deb [Signed-By=/usr/share/keyrings/gazebo-official.gpg]
       http://packages.osrfoundation.org/gazebo/ubuntu-stable
       {{ansible_facts.distribution_release}}
       main

@@ -24,7 +24,7 @@
   become: yes
   ansible.builtin.apt_repository:
     repo: >-
-      deb [Signed-By=/usr/share/keyrings/ros-official.gpg]
+      deb [signed-by=/usr/share/keyrings/ros-official.gpg]
       http://packages.ros.org/ros/ubuntu
       {{ansible_facts.distribution_release}}
       main

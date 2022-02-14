@@ -28,7 +28,7 @@
       http://packages.ros.org/ros/ubuntu
       {{ansible_facts.distribution_release}}
       main
-    filename: ros-official
+    filename: ros1-latest
 
 - name: Install latest Gazebo
   include_role:

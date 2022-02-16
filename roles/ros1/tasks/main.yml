@@ -20,6 +20,16 @@
     url: https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc
     keyring: /usr/share/keyrings/ros-official.gpg
 
+- name: Remove insecure ROS apt entry
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: >-
+      deb http://packages.ros.org/ros/ubuntu
+      {{ansible_facts.distribution_release}}
+      main
+    filename: ros1-latest
+    state: absent
+
 - name: Add ROS APT repository
   become: yes
   ansible.builtin.apt_repository:
@@ -29,6 +39,7 @@
       {{ansible_facts.distribution_release}}
       main
     filename: ros1-latest
+    state: present
 
 - name: Install latest Gazebo
   include_role:

@@ -1,0 +1,4 @@
+--- # defaults file for ignition
+ignition_version:
+  # Version of ignition to install.
+  "fortress"

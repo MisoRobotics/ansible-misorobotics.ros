@@ -1,0 +1,4 @@
+--- # tasks file for ignition
+- name: Install ignition
+  become: yes
+  apt: {    name: ["ignition-{{ ignition_version }}"] }

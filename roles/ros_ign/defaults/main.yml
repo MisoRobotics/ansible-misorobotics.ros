@@ -1,0 +1,4 @@
+--- # defaults file for ros_ign
+ros_version:
+  # Version of ROS to install for.
+  "galactic"

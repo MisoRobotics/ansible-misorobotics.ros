@@ -1,0 +1,44 @@
+--- # tasks file for ros_ign
+- name: Create workspace directory
+  become: yes
+  file:
+    path: /opt/ros_ign/src/ros_ign
+    state: directory
+
+- name: Clone ros_ign
+  become: yes
+  git:
+    repo: https://github.com/ignitionrobotics/ros_ign
+    dest: /opt/ros_ign/src/ros_ign
+    depth: 1
+    version: "{{ ros_version }}"
+
+- name: Remove rosdep default sources
+  become: yes
+  file:
+    path: /etc/ros/rosdep/sources.list.d/20-default.list
+    state: absent
+
+- name: Initialize rosdep sources
+  become: yes
+  shell: rosdep init
+
+- name: Update rosdep sources
+  shell: rosdep update
+
+- name: Install rosdep dependencies
+  shell:
+    chdir: /opt/ros_ign/src
+    executable: bash
+    cmd: |
+      . /opt/ros/{{ ros_version }}/setup.bash
+      rosdep install -r -i -y --from-paths .
+
+- name: Install ros_ign
+  become: yes
+  shell:
+    chdir: /opt/ros_ign
+    executable: bash
+    cmd: |
+      . /opt/ros/{{ ros_version }}/setup.bash
+      colcon build

@@ -1,0 +1,27 @@
+--- # defaults file for ros2
+ros_distro:
+  # Distribution of ROS to install.
+  galactic
+
+dev:
+  # If yes, install ROS development packages.
+  yes
+
+dev_packages:
+  # Python packages to install for ROS development.
+  - colcon-common-extensions
+  - dev
+  - empy
+  - rosdep
+  - setuptools
+  - vcstool
+  - wheel
+  - wstool
+
+packages:
+  # ROS packages to install (without ros-{ros_distro}- prefix).
+  []
+
+rosdep_update:
+  # If true, initialize rosdep and update sources
+  yes

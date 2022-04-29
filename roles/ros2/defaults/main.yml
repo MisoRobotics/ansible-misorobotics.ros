@@ -10,6 +10,7 @@ dev:
 dev_packages:
   # Python packages to install for ROS development.
   - colcon-common-extensions
+  - colcon-mixin
   - dev
   - empy
   - rosdep

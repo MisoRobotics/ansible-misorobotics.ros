@@ -1,4 +1,4 @@
---- # vars file for ros_ign
+--- # vars file for ros_gz
 ros_version:
   # Version of ROS to install for.
   "galactic"

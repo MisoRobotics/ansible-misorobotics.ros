@@ -1,0 +1,44 @@
+--- # tasks file for ros_gz
+- name: Create workspace directory
+  become: yes
+  file:
+    path: /opt/ros_gz/src/ros_gz
+    state: directory
+
+- name: Clone ros_gz
+  become: yes
+  git:
+    repo: https://github.com/gazebosim/ros_gz.git
+    dest: /opt/ros_gz/src/ros_gz
+    depth: 1
+    version: "{{ ros_version }}"
+
+- name: Remove rosdep default sources
+  become: yes
+  file:
+    path: /etc/ros/rosdep/sources.list.d/20-default.list
+    state: absent
+
+- name: Initialize rosdep sources
+  become: yes
+  shell: rosdep init
+
+- name: Update rosdep sources
+  shell: rosdep update
+
+- name: Install rosdep dependencies
+  shell:
+    chdir: /opt/ros_gz/src
+    executable: bash
+    cmd: |
+      . /opt/ros/{{ ros_version }}/setup.bash
+      rosdep install -r -i -y --from-paths .
+
+- name: Install ros_gz
+  become: yes
+  shell:
+    chdir: /opt/ros_gz
+    executable: bash
+    cmd: |
+      . /opt/ros/{{ ros_version }}/setup.bash
+      colcon build
